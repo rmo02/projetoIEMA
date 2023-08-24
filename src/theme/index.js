@@ -3,6 +3,7 @@ export default themes = {
       WHITE: '#FFFFFF',
 
       FUNDO:'#202124',
+      CARD:'#303235',
   
       GREEN_300: '#1CC3BB',
       GREEN_400:'#19ABA3',
