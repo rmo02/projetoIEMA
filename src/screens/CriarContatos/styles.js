@@ -2,8 +2,10 @@ import { View } from "react-native";
 import styled from "styled-components/native";
 
 export const Container = styled.View`
-  flex: 1;
+  flex: 0.8;
   padding: 20px;
+  justify-content: center;
+  align-items: center;
   background-color:  ${(props) => props.theme["FUNDO"]};;
 `;
 
@@ -22,7 +24,7 @@ justify-content: center;
 `;
 
 export const ContainerNome = styled.TextInput`
-width: "100%";
+width: 550px;
 height: 40px;
 background-color: ${(props) => props.theme["WHITE"]} ;
 border-radius: 12px;
@@ -32,14 +34,15 @@ export const ContainerInfo =styled.View`
 flex-direction: row;
 margin-top: 10px;
 justify-content: space-between;
+gap: 25px;
 `;
 export const ContainerProfissao=styled.View`
 align-items: flex-start;
-
 `;
 export const InputProfissao = styled.TextInput`
-width: 320px;
+width: 270px;
 height: 40px;
+
 background-color: ${(props) => props.theme["WHITE"]} ;
 border-radius: 12px;
 padding-left: 10px;
@@ -52,5 +55,12 @@ background-color: ${(props) => props.theme["WHITE"]} ;
 border-radius: 12px;
 padding-left: 10px;
 margin-top: 10px;
+`;
+
+export const ContainerButtons = styled.View`
+margin-top: 20px;
+justify-content: flex-end;
+flex-direction: row;
+gap: 10px;
 `;
 
