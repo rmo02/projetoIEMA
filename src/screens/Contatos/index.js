@@ -15,6 +15,8 @@ import { ModalcriarContato } from "../../components/ModalCriarContato";
 
 export function Contatos() {
   const [isModal, setIsModal] = useState(false);
+
+  console.log(isModal)
   return (
     <Container>
       <Header>
