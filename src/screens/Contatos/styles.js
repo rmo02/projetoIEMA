@@ -91,3 +91,19 @@ flex-direction: row;
 align-items: center;
 `;
 
+
+
+
+export const ModalContainer = styled.View`
+flex: 1;
+justify-content: center;
+align-items: center;
+`;
+
+export const ModalContent = styled.View`
+background-color: ${(props) => props.theme["GRAY_300"]};
+justify-content: center;
+align-items: center;
+border-radius: 10px;
+padding: 20px;
+`;
