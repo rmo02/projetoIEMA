@@ -34,5 +34,4 @@ export default themes = {
       BLUE_400:'#467495',
       BLUE_700: '#284255',
   
-
   };
