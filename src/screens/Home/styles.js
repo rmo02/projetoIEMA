@@ -9,3 +9,10 @@ export const Text = styled.Text`
   font-size: 24px;
   color: black;
 `;
+
+export const ContainerCards =styled.View`
+flex-wrap:wrap ;
+flex-direction: row;
+justify-content: flex-start;
+align-items: center;
+`;
