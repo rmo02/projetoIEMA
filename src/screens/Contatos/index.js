@@ -9,14 +9,15 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { useState } from "react";
-import { Modal, View } from "react-native";
+import { FlatList, Modal, ScrollView, View } from "react-native";
 import { CardContato } from "../../components/CardContato";
 import { ModalcriarContato } from "../../components/ModalCriarContato";
 
+
 export function Contatos() {
   const [isModal, setIsModal] = useState(false);
+  const data = ["1", "2", "3","4", "5"];
 
-  console.log(isModal)
   return (
     <Container>
       <Header>
@@ -36,7 +37,21 @@ export function Contatos() {
         <ModalcriarContato setIsModal={setIsModal}/>
       </Modal>
 
+      {/* <ScrollView>
       <CardContato />
+      <CardContato /><CardContato /><CardContato /><CardContato /><CardContato /><CardContato /><CardContato /><CardContato /><CardContato />
+      </ScrollView> */}
+
+    <FlatList 
+    data={data}
+    keyExtractor={(item) => item}
+        renderItem={({ item }) => (
+          <CardContato />
+        )}
+    />
+
+
+
     </Container>
   );
 }
