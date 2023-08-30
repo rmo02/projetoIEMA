@@ -9,9 +9,9 @@ export default themes = {
     GREEN_400: '#19ABA3',
     GREEN_700: '#0E615D',
 
-    ROSE_200: '#D9749F',
+    ROSE_300: '#D9749F',
     ROSE_400: '#BE668B',
-    ROSE_500: '#6C3A4F',
+    ROSE_700: '#6C3A4F',
 
     RED_300: '#EF2E5C',
     RED_400: '#D12851',
@@ -21,6 +21,10 @@ export default themes = {
     YELLOW_400: '#DA8205',
     YELLOW_600: '#7C4A03',
     YELLOW_900: '#FB9606',
+
+    PURPLE_300:"#7B559A",
+    PURPLE_400:"#6B4A86",
+    PURPLE_700:"#3D2A4C",
 
     GRAY_100: '#E1E1E6',
     GRAY_200: '#C4C4CC',

@@ -12,8 +12,8 @@ import {
   Text,
 } from "./stytes";
 import nario from "../../../assets/nario.png";
-import { Botao } from "../Button";
 import { useState } from "react";
+import { Botao } from "../Buttton";
 
 export function ModalcriarContato({setIsModal}) {
   const [nome,setNome] = useState('');
