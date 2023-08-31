@@ -11,8 +11,13 @@ export const Text = styled.Text`
 `;
 
 export const ContainerCards =styled.View`
-flex-wrap:wrap ;
+margin-top: 25px ;
+flex: 1;
+width: 100%;
+gap: 10px;
+flex-wrap:wrap;
 flex-direction: row;
 justify-content: flex-start;
 align-items: center;
+justify-content: center;
 `;

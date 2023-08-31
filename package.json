@@ -17,7 +17,8 @@
     "styled-components": "^6.0.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "babel-plugin-styled-components": "^2.1.4"
   },
   "private": true
 }
