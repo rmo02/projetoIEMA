@@ -12,17 +12,20 @@ import { useState } from "react";
 import { FlatList, Modal, ScrollView, View } from "react-native";
 import { CardContato } from "../../components/CardContato";
 import { ModalcriarContato } from "../../components/ModalCriarContato";
+import { useNavigation } from "@react-navigation/core";
 
 
 export function Contatos() {
   const [isModal, setIsModal] = useState(false);
   const data = ["1", "2", "3","4", "5"];
 
+  const navigation = useNavigation();
+
   return (
     <Container>
       <Header>
         <ContainerButtom>
-          <BotaoVoltar>
+          <BotaoVoltar onPress={()=>navigation.goBack()}>
             <AntDesign name="arrowleft" size={24} color="white" />
           </BotaoVoltar>
 
@@ -36,11 +39,6 @@ export function Contatos() {
       <Modal visible={isModal} transparent={true} animationType="slide">
         <ModalcriarContato setIsModal={setIsModal}/>
       </Modal>
-
-      {/* <ScrollView>
-      <CardContato />
-      <CardContato /><CardContato /><CardContato /><CardContato /><CardContato /><CardContato /><CardContato /><CardContato /><CardContato />
-      </ScrollView> */}
 
     <FlatList 
     data={data}

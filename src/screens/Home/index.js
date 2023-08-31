@@ -1,3 +1,4 @@
+import { CardHibrida } from "../../components/CardHibrida";
 import { Header } from "../../components/Header";
 import { Container, ContainerCards, Text } from "./styles";
 
