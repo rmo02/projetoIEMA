@@ -7,10 +7,9 @@ import { Contatos } from './src/screens/Contatos';
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Contatos />
+      <Home />
       <StatusBar backgroundColor={"transparent"} translucent />
     </ThemeProvider>
 
   );
 }
-
