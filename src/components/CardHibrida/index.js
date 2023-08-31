@@ -17,6 +17,7 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import { optionColorMapping } from "../../data/Lives";
 
 
 const data = [
@@ -31,10 +32,10 @@ const data = [
 ];
 
 const nome = [
-  { label: "alexandra", id: "1" },
-  { label: "brenda", id: "2" },
-  { label: "ramon", id: "3" },
-  { label: "vinicius", id: "4" },
+  { label: "Alexandra - SLZ", value: "1" },
+  { label: "Brenda - ITZ", value: "2" },
+  { label: "Ramon - SLZ", value: "3" },
+  { label: "Vinicius - ITZ", value: "4" },
 ];
 
 const option = ["L1", "L2", "L3", "L4", "L5", "L6", "S1", "S2", "S3"];
@@ -46,12 +47,17 @@ export function CardHibrida() {
   // Render buttons
   const renderLive = (startIndex, endIndex) => {
     return option.slice(startIndex, endIndex).map((opt, index) => {
-      const overallIndex = index + startIndex; // Calculate overall index
+      const overallIndex = index + startIndex;
+      const colors = optionColorMapping[opt]; // Obtenha o mapeamento de cores para a opção atual
+
       return (
         <ButtonLive
           key={index}
           onPress={() => setSelected(overallIndex)}
-          selected={selected === overallIndex} // Compare with overall index
+          selected={selected === overallIndex}
+          color300={colors.color300} // Passe a cor 300 como prop para o botão
+          color500={colors.color500} // Passe a cor 500 como prop para o botão
+          color700={colors.color700} // Passe a cor 700 como prop para o botão
         >
           <Text>{opt}</Text>
         </ButtonLive>
@@ -60,7 +66,7 @@ export function CardHibrida() {
   };
 
   return (
-    <Container>
+    <Container color700={optionColorMapping[option[selected]]?.color700}>
       <Content>
         <Foto source={fylip} alt="perfil" />
         <ContentInfo>
@@ -78,7 +84,7 @@ export function CardHibrida() {
             search
             maxHeight={300}
             labelField="label"
-            valueField="id"
+            valueField="value"
             placeholder="Funcionário"
             searchPlaceholder="Pesquisar"
             value={value}
@@ -96,11 +102,11 @@ export function CardHibrida() {
           />
 
           <Dados>
-            <Ionicons name="mic" size={24} color="#19ABA3" />
+            <Ionicons name="mic" size={24} color={optionColorMapping[option[selected]]?.color300} />
             <Text>Reporter</Text>
           </Dados>
           <Dados>
-            <Feather name="phone-call" size={24} color="#19ABA3" />
+            <Feather name="phone-call" size={24} color={optionColorMapping[option[selected]]?.color300} />
             <Text>(98)98888-8888</Text>
           </Dados>
         </ContentInfo>
@@ -111,6 +117,7 @@ export function CardHibrida() {
           <View>
             <View style={{ flexDirection: "row", gap: 5, marginBottom: 5 }}>
               {renderLive(0, 3)}
+              {renderLive(6, 8)}
             </View>
             <View style={{ flexDirection: "row", gap: 5, width: 350 }}>
               {renderLive(3, 6)}

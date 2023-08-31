@@ -1,11 +1,12 @@
 import styled from "styled-components/native";
+import { Ionicons as IoniconsOriginal } from "@expo/vector-icons";
 
 export const Container = styled.View`
   width: 24%;
   height: 45%;
   border-radius: 16px;
   flex-shrink: 0;
-  background-color: ${(props) => props.theme["GREEN_700"]};
+  background-color: ${(props) => props.color700 || "transparent"};
 `;
 
 export const Content = styled.View`
@@ -54,11 +55,8 @@ export const ButtonLive = styled.TouchableOpacity`
   justify-content: center;
   border-width: 1px;
   border-color: ${(props) =>
-    props.selected ? props.theme["GREEN_400"] : props.theme["WHITE"]};
-  background-color: ${(props) =>
-    props.selected
-      ? props.theme["GREEN_400"] // Change to the selected color
-      : props.theme["GREEN_700"]}; // Change to the not selected color
+    props.selected ? props.color500 : props.theme["WHITE"]};
+  background-color: ${(props) => props.selected ? props.color500 : 'transparent'};
 `;
 
 export const ContainerLive = styled.View`
@@ -70,3 +68,8 @@ export const ContainerLive = styled.View`
   flex-wrap: wrap;
   margin-top: 10px;
 `;
+
+export const StyledIonicons = styled(IoniconsOriginal)`
+  color: ${(props) => props.theme[props.color300] || "#000"};
+`;
+
