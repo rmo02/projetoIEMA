@@ -1,7 +1,7 @@
 import { styled } from "styled-components/native";
 
 export const Container=styled.View`
-width: 1290px;
+width: 1100px;
 height: 130px;
 border-bottom: 16px;
 `;
@@ -13,8 +13,13 @@ border-bottom-left-radius:16px;
 border-bottom-right-radius:16px;
 `;
 
+export const Content = styled.View`
+flex-direction: row;
+justify-content:space-between;
+`;
+
 export const ContainerButtons= styled.View`
- z-index: 2;
+z-index: 2;
 padding-left: 20px;
 gap: 10px;
 margin-top: -80px;
@@ -39,4 +44,23 @@ export const ButtonDelete= styled.TouchableOpacity`
  justify-content: center;
  align-items: center;
  background-color: ${(props) => props.theme["YELLOW_900"]};
+`;
+
+export const ContainerData = styled.View`
+z-index: 2;
+align-items: flex-end;
+
+margin-top: -90px;
+`;
+
+export const TitleHora = styled.Text`
+font-size: 28px;
+color: #000;
+font-weight: bold;
+`;
+
+export const TitleData = styled.Text`
+font-size: 16px;
+color: #000;
+font-weight: bold;
 `;
