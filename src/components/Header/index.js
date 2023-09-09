@@ -4,19 +4,19 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import dayjs from 'dayjs';
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 
 export function Header() {
     const [date, setDate] = useState(dayjs())
-
+    const navigation = useNavigation();
 
     return (
         <Container>
             <Logo source={jm1} resizeMode="cover" />
-
             <Content>
                 <ContainerButtons>
-                    <ButtonContato>
+                    <ButtonContato onPress={() => navigation.navigate('Contatos')}>
                         <MaterialIcons name="person-add-alt-1" size={24} color="white" />
                     </ButtonContato>
                     <ButtonDelete>

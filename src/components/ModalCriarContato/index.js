@@ -15,6 +15,17 @@ import nario from "../../../assets/nario.png";
 import { useState } from "react";
 import { Botao } from "../Buttton";
 
+const Profissao = [
+  { label: 'Reporter', value: 'Reporter' },
+  { label: 'Cinegrafista', value: 'Cinegrafista' }
+];
+
+const Praca = [
+  { label: 'SLS', value: 'São Luis' },
+  { label: 'ITZ', value: 'Imperatriz' },
+  { label: 'Balsas', value: 'Balsas' },
+];
+
 export function ModalcriarContato({setIsModal}) {
   const [nome,setNome] = useState('');
   const[contato1,setContato1]=useState('');

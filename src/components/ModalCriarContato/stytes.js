@@ -43,7 +43,9 @@ export const AlterarFotoButton = styled.TouchableOpacity`
 `;
 
 export const Foto = styled.Image`
-
+width: 150px;
+height: 150px;
+border-radius: 100px;
 `;
 
 export const Input = styled.TextInput`
