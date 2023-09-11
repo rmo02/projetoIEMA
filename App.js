@@ -11,6 +11,6 @@ export default function App() {
       <Routes/>
       <StatusBar backgroundColor={"transparent"} translucent />
     </ThemeProvider>
-
+    
   );
 }
