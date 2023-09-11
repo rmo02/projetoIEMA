@@ -14,6 +14,7 @@ import {
 import nario from "../../../assets/nario.png";
 import { useState } from "react";
 import { Botao } from "../Buttton";
+import api from "../../api";
 
 const Profissao = [
   { label: 'Reporter', value: 'Reporter' },
@@ -30,17 +31,26 @@ export function ModalcriarContato({setIsModal}) {
   const [nome,setNome] = useState('');
   const[contato1,setContato1]=useState('');
   const [contato2,setConato2]=useState('');
-  const[profissao,setProfissao]=useState('');
+  const[cargo,setCargo]=useState('');
   const [praca,setPraca]=useState('');
 
-  const onSubmit = () => {
-    console.log('nome', nome)
-    console.log('profissao', profissao)
-    console.log('praça', praca)
-    console.log('contato 1', contato1)
-    console.log('contato 2', contato2)
-  }
+  const onSubmit = async() => {
+    try {
+      const res=await api.post('/employees',{
+        nome,
+        cargo,
+        foto:"",
+        telefones:[`${contato1},${contato2}`]
+      })
+      console.log('deu certo',res) 
+    } catch (error) {
+      console.log (error)
+    }
 
+  }
+const postContato = async ( )=>{
+  
+}
   return (
     <ModalContainer>
       <ModalContent>
@@ -54,7 +64,7 @@ export function ModalcriarContato({setIsModal}) {
         <ContainerDados>
           <ContainerInfo>
             <Text>Profissão</Text>
-            <Input style={{ width: 370, height: 40 }} placeholder="Profissão" value={profissao} onChangeText={text=>setProfissao(text)}/>
+            <Input style={{ width: 370, height: 40 }} placeholder="Profissão" value={cargo} onChangeText={text=>setCargo(text)}/>
           </ContainerInfo>
           <ContainerInfo>
             <Text>Praça</Text>
