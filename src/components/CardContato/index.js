@@ -13,6 +13,7 @@ import {
 import nario from "../../../assets/nario.png";
 
 export function CardContato({ data }) {
+
   return (
     <Card>
       <ContainerInfo>

@@ -35,13 +35,7 @@ export function Contatos() {
     getContatos()
   }, [])
 
-  const formatarNumero = (contatos) => {
-    const telefone = contatos?.telefones[0]
-    const ddd = telefone?.slice(0, 2)
-    const prefixo = telefone?.slice(3, 7)
-    const sufixo = telefone?.slice(8, 11)
-    return `(${ddd})${prefixo}-${sufixo}`
-  }
+
 
   return (
     <Container>

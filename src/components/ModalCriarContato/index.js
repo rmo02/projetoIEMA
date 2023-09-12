@@ -15,6 +15,7 @@ import nario from "../../../assets/nario.png";
 import { useState } from "react";
 import { Botao } from "../Buttton";
 import api from "../../api";
+import * as ImagePicker from "expo-image-picker";
 
 const Profissao = [
   { label: "Reporter", value: "Reporter" },
@@ -33,13 +34,52 @@ export function ModalcriarContato({ setIsModal }) {
   const [contato2, setConato2] = useState("");
   const [cargo, setCargo] = useState("");
   const [praca, setPraca] = useState("");
+  const [photoIsLoading, setPhotoIsLoading] = useState(false);
+  const [userPhoto, setUserPhoto] = useState(
+    "https://avatars.githubusercontent.com/u/68224?v=4"
+  );
+
+  async function handleUserPhotoSelect() {
+    try {
+      const photoSelected = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        quality: 1,
+        aspect: [4, 4],
+        allowsEditing: true,
+      });
+
+      //se o usuário cancelar não acontece nada
+      if (photoSelected.canceled) {
+        return;
+      }
+
+      if (photoSelected.assets[0].uri) {
+        setUserPhoto(photoSelected.assets[0].uri);
+      }
+
+      const fileExtension = photoSelected.assets[0].uri.split(".").pop();
+
+      const photoFile = {
+        name: `${nome}.${fileExtension}`.toLowerCase(),
+        uri: photoSelected.assets[0].uri,
+        type: `${photoSelected.assets[0].type}/${fileExtension}`,
+      };
+
+      // Criar um objeto FormData para enviar a imagem
+      const formData = new FormData();
+      formData.append("foto", photoFile);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const onSubmit = async () => {
     try {
       const res = await api.post("/employees", {
         nome,
         cargo,
-        foto: "",
+        praca,
+        foto: userPhoto,
         telefones: [`${contato1},${contato2}`],
       });
       console.log("deu certo", res);
@@ -51,11 +91,11 @@ export function ModalcriarContato({ setIsModal }) {
   return (
     <ModalContainer>
       <ModalContent>
-        <AlterarFotoButton>
+        <AlterarFotoButton onPress={handleUserPhotoSelect}>
           <SubTitle>Alterar Foto</SubTitle>
         </AlterarFotoButton>
         <ContainerFoto>
-          <Foto source={nario} />
+          <Foto source={{ uri: userPhoto }} />
         </ContainerFoto>
         <Input
           placeholder="Nome"
