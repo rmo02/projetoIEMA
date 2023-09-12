@@ -8,24 +8,40 @@ import {
 } from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FlatList, Modal, ScrollView, View } from "react-native";
 import { CardContato } from "../../components/CardContato";
 import { ModalcriarContato } from "../../components/ModalCriarContato";
 import { useNavigation } from "@react-navigation/core";
+import api from "../../api";
 
 
 export function Contatos() {
   const [isModal, setIsModal] = useState(false);
-  const data = ["1", "2", "3","4", "5"];
-
+  const [contatos, setContatos] = useState();
   const navigation = useNavigation();
+
+
+  const getContatos = async() => {
+    try {
+      const res = await api.get('/employees');
+      setContatos(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getContatos()
+  }, [])
+
+
 
   return (
     <Container>
       <Header>
         <ContainerButtom>
-          <BotaoVoltar onPress={()=>navigation.goBack()}>
+          <BotaoVoltar onPress={() => navigation.goBack()}>
             <AntDesign name="arrowleft" size={24} color="white" />
           </BotaoVoltar>
 
@@ -37,18 +53,16 @@ export function Contatos() {
       </Header>
 
       <Modal visible={isModal} transparent={true} animationType="slide">
-        <ModalcriarContato setIsModal={setIsModal}/>
+        <ModalcriarContato setIsModal={setIsModal} />
       </Modal>
 
-    <FlatList 
-    data={data}
-    keyExtractor={(item) => item}
+      <FlatList
+        data={contatos}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <CardContato />
+          <CardContato data={item}/>
         )}
-    />
-
-
+      />
 
     </Container>
   );
