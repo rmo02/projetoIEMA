@@ -39,7 +39,7 @@ export function ModalcriarContato({ setIsModal }) {
     "https://avatars.githubusercontent.com/u/68224?v=4"
   );
 
-  async function handleUserPhotoSelect() {
+  const handleUserPhotoSelect = async () => {
     try {
       const photoSelected = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -49,40 +49,46 @@ export function ModalcriarContato({ setIsModal }) {
       });
 
       //se o usuário cancelar não acontece nada
-      if (photoSelected.canceled) {
+      if (photoSelected.cancelled) {
         return;
       }
 
       if (photoSelected.assets[0].uri) {
         setUserPhoto(photoSelected.assets[0].uri);
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-      const fileExtension = photoSelected.assets[0].uri.split(".").pop();
+  const onSubmit = async () => {
+    try {
+      const fileExtension = userPhoto.split(".").pop();
 
       const photoFile = {
         name: `${nome}.${fileExtension}`.toLowerCase(),
-        uri: photoSelected.assets[0].uri,
-        type: `${photoSelected.assets[0].type}/${fileExtension}`,
+        uri: userPhoto,
+        type: `image/${fileExtension}`,
       };
 
       // Criar um objeto FormData para enviar a imagem
       const formData = new FormData();
       formData.append("foto", photoFile);
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
-  const onSubmit = async () => {
-    try {
-      const res = await api.post("/employees", {
-        nome,
-        cargo,
-        praca,
-        foto: userPhoto,
-        telefones: [`${contato1},${contato2}`],
+      // Adicione outros campos ao FormData
+      formData.append("nome", nome);
+      formData.append("cargo", cargo);
+      formData.append("praca", praca);
+      formData.append("telefones", JSON.stringify([contato1, contato2]));
+
+      // Enviar os dados para o servidor
+      const response = await api.post("/employees", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
-      console.log("deu certo", res);
+
+      console.log("deu certo", response);
     } catch (error) {
       console.log(error);
     }
