@@ -13,11 +13,13 @@ import {
 import fylip from "../../../assets/fylip.jpeg";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View, Modal } from "react-native";
 import { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { optionColorMapping } from "../../data/Lives";
+import { ModalcriarContato } from "../../components/ModalCriarContato";
+import { ModalCard } from "../ModalCard";
 
 
 const data = [
@@ -41,15 +43,17 @@ const nome = [
 const option = ["L1", "L2", "L3", "L4", "L5", "L6", "S1", "S2", "S3"];
 
 export function CardHibrida() {
+  const [isModalCardVisible, setIsModalCardVisible] = useState(false);
   const [value, setValue] = useState(null);
   const [selected, setSelected] = useState(null);
+
+ 
 
   // Render buttons
   const renderLive = (startIndex, endIndex) => {
     return option.slice(startIndex, endIndex).map((opt, index) => {
       const overallIndex = index + startIndex;
       const colors = optionColorMapping[opt]; // Obtenha o mapeamento de cores para a opção atual
-
       return (
         <ButtonLive
           key={index}
@@ -66,13 +70,25 @@ export function CardHibrida() {
   };
 
   return (
-    <Container color700={optionColorMapping[option[selected]]?.color700}>
+    <Container color700={optionColorMapping[option[selected]]?.color700 }>
       <Content>
         <Foto source={fylip} alt="perfil" />
         <ContentInfo>
-          <SelectHibrida onPress={() => console.log("hibrida")}>
+          <SelectHibrida onPress={() => setIsModalCardVisible(true)}>
             <Text>Híbrida 1</Text>
           </SelectHibrida>
+
+          <Modal 
+            onRequestClose={()=>setIsModalCardVisible(false)}
+            visible={isModalCardVisible} 
+            transparent={true} 
+            animationType="slide" >
+            
+            <ModalCard 
+              selecionado={selected}
+               handleClose={()=>setIsModalCardVisible(false)} 
+            />
+          </Modal>
 
           <Dropdown
             style={styles.dropdown}
@@ -113,7 +129,7 @@ export function CardHibrida() {
       </Content>
 
       <ContainerLive>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{height:300,paddingBottom:30}}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ height: 300, paddingBottom: 30 }}>
           <View>
             <View style={{ flexDirection: "row", gap: 5, marginBottom: 5 }}>
               {renderLive(0, 3)}
