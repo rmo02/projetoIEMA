@@ -19,10 +19,23 @@ import api from "../../api";
 export function Contatos() {
   const [isModal, setIsModal] = useState(false);
   const [contatos, setContatos] = useState();
+  const [filtro, setFiltro] = useState("");
   const navigation = useNavigation();
 
+  const filterContatos = () => {
+    return contatos?.filter((contato) => {
+      const { nome, cargo, praca } = contato;
+      const normalizedSearch = filtro.toLowerCase();
+      return (
+        nome.toLowerCase().includes(normalizedSearch) ||
+        praca.toLowerCase().includes(normalizedSearch) ||
+        cargo.toLowerCase().includes(normalizedSearch)
+      )
+    })
+  }
 
-  const getContatos = async() => {
+
+  const getContatos = async () => {
     try {
       const res = await api.get('/employees');
       setContatos(res.data)
@@ -35,13 +48,7 @@ export function Contatos() {
     getContatos()
   }, [])
 
-  const formatarNumero = (contatos) => {
-    const telefone = contatos?.telefones[0]
-    const ddd = telefone?.slice(0, 2)
-    const prefixo = telefone?.slice(3, 7)
-    const sufixo = telefone?.slice(8, 11)
-    return `(${ddd})${prefixo}-${sufixo}`
-  }
+
 
   return (
     <Container>
@@ -55,7 +62,10 @@ export function Contatos() {
             <Ionicons name="add" size={24} color="white" />
           </BotaoAdd>
         </ContainerButtom>
-        <Pesquisa placeholder="pesquisar" />
+        <Pesquisa
+          value={filtro}
+          onChangeText={(text) => setFiltro(text)}
+          placeholder="pesquisar" />
       </Header>
 
       <Modal visible={isModal} transparent={true} animationType="slide">
@@ -63,10 +73,10 @@ export function Contatos() {
       </Modal>
 
       <FlatList
-        data={contatos}
+        data={filterContatos()}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <CardContato data={item}/>
+          <CardContato data={item} />
         )}
       />
 

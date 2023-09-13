@@ -14,6 +14,7 @@ import {
 import nario from "../../../assets/nario.png";
 import { useState } from "react";
 import { Botao } from "../Buttton";
+import * as  ImagePicker from "expo-image-picker"; 
 
 const Profissao = [
   { label: 'Reporter', value: 'Reporter' },
@@ -32,6 +33,18 @@ export function ModalcriarContato({setIsModal}) {
   const [contato2,setConato2]=useState('');
   const[profissao,setProfissao]=useState('');
   const [praca,setPraca]=useState('');
+  const[userPhoto,setUserPhoto]=useState('https://avatars.githubusercontent.com/u/142349109?v=4');
+
+  async function handleUserPhotoSelect(){
+    const photoSelect= await ImagePicker.launchImageLibraryAsync({
+      mediaTypes:ImagePicker.MediaTypeOptions.Images,
+      quality:1,
+      aspect:[4,4],
+      allowsEditing:true,
+    });
+    if(photoSelect.canceled){return} 
+    setUserPhoto(photoSelect.assets[0].uri)
+  }
 
   const onSubmit = () => {
     console.log('nome', nome)
@@ -44,11 +57,11 @@ export function ModalcriarContato({setIsModal}) {
   return (
     <ModalContainer>
       <ModalContent>
-        <AlterarFotoButton>
+        <AlterarFotoButton onPress={handleUserPhotoSelect}  >
           <SubTitle>Alterar Foto</SubTitle>
         </AlterarFotoButton>
         <ContainerFoto>
-          <Foto source={nario} />
+          <Foto source={{uri:userPhoto}} />
         </ContainerFoto>
         <Input placeholder="Nome" value={nome} onChangeText={text => setNome(text)}/>
         <ContainerDados>
