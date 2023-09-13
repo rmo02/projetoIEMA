@@ -32,6 +32,8 @@ align-items: center;
 export const Perfil =styled.Image`
 width: 100px;
 height:120px;
+border-bottom-left-radius: 50px;
+border-bottom-right-radius: 50px;
 `;
 
 export const Text = styled.Text`

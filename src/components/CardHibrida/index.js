@@ -20,27 +20,16 @@ import { Feather } from "@expo/vector-icons";
 import { optionColorMapping } from "../../data/Lives";
 
 
-const data = [
-  { label: "Hibrida 1", value: "1" },
-  { label: "Hibrida 2", value: "2" },
-  { label: "Hibrida 3", value: "3" },
-  { label: "Hibrida 4", value: "4" },
-  { label: "Hibrida 5", value: "5" },
-  { label: "Hibrida 6", value: "6" },
-  { label: "Hibrida 7", value: "7" },
-  { label: "Hibrida 8", value: "8" },
-];
-
-const nome = [
-  { label: "Alexandra - SLZ", value: "1" },
-  { label: "Brenda - ITZ", value: "2" },
-  { label: "Ramon - SLZ", value: "3" },
-  { label: "Vinicius - ITZ", value: "4" },
-];
-
 const option = ["L1", "L2", "L3", "L4", "L5", "L6", "S1", "S2", "S3"];
 
-export function CardHibrida() {
+export function CardHibrida({data}) {
+  const nome = 
+    data?.map((func)=>{
+      return (
+        { label: `${func.nome}`, value: `${func.id}`}
+      )
+    })
+
   const [value, setValue] = useState(null);
   const [selected, setSelected] = useState(null);
 
