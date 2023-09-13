@@ -34,7 +34,6 @@ export function ModalcriarContato({ setIsModal, onCadastroSucesso }) {
   const [contato2, setConato2] = useState("");
   const [cargo, setCargo] = useState("");
   const [praca, setPraca] = useState("");
-  const [photoIsLoading, setPhotoIsLoading] = useState(false);
   const [userPhoto, setUserPhoto] = useState(
     "https://avatars.githubusercontent.com/u/68224?v=4"
   );
