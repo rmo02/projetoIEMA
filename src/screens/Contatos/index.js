@@ -15,27 +15,42 @@ import { ModalcriarContato } from "../../components/ModalCriarContato";
 import { useNavigation } from "@react-navigation/core";
 import api from "../../api";
 
-
 export function Contatos() {
   const [isModal, setIsModal] = useState(false);
   const [contatos, setContatos] = useState();
+  const [searchTerm, setSearchTerm] = useState("");
   const navigation = useNavigation();
 
+  const filterContatos = () => {
+    return contatos.filter((contato) => {
+      const { nome, praca, cargo } = contato;
+      const normalizedSearch = searchTerm.toLowerCase();
 
-  const getContatos = async() => {
+      return (
+        nome.toLowerCase().includes(normalizedSearch) ||
+        praca.toLowerCase().includes(normalizedSearch) ||
+        cargo.toLowerCase().includes(normalizedSearch)
+      );
+    });
+  };
+
+  const getContatos = async () => {
     try {
-      const res = await api.get('/employees');
-      setContatos(res.data)
+      const res = await api.get("/employees");
+      setContatos(res.data);
+      console.log(res.data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    getContatos()
-  }, [])
+    getContatos();
+  }, []);
 
-
+  const handleCadastroSucesso = () => {
+    getContatos(); // Chamar a função para buscar os contatos novamente após o cadastro bem-sucedido
+  };
 
   return (
     <Container>
@@ -49,21 +64,25 @@ export function Contatos() {
             <Ionicons name="add" size={24} color="white" />
           </BotaoAdd>
         </ContainerButtom>
-        <Pesquisa placeholder="pesquisar" />
+        <Pesquisa
+          placeholder="Pesquisar por nome, praça ou cargo"
+          value={searchTerm}
+          onChangeText={(text) => setSearchTerm(text)}
+        />
       </Header>
 
       <Modal visible={isModal} transparent={true} animationType="slide">
-        <ModalcriarContato setIsModal={setIsModal} />
+        <ModalcriarContato
+          setIsModal={setIsModal}
+          onCadastroSucesso={handleCadastroSucesso}
+        />
       </Modal>
 
       <FlatList
-        data={contatos}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <CardContato data={item}/>
-        )}
+        data={filterContatos()} // Usar a lista filtrada
+        keyExtractor={(item) => item.id.toString()} // Usar id.toString() para a chave
+        renderItem={({ item }) => <CardContato data={item} />}
       />
-
     </Container>
   );
 }

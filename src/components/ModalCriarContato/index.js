@@ -28,7 +28,7 @@ const Praca = [
   { label: "Balsas", value: "Balsas" },
 ];
 
-export function ModalcriarContato({ setIsModal }) {
+export function ModalcriarContato({ setIsModal, onCadastroSucesso }) {
   const [nome, setNome] = useState("");
   const [contato1, setContato1] = useState("");
   const [contato2, setConato2] = useState("");
@@ -49,7 +49,7 @@ export function ModalcriarContato({ setIsModal }) {
       });
 
       //se o usuário cancelar não acontece nada
-      if (photoSelected.cancelled) {
+      if (photoSelected.canceled) {
         return;
       }
 
@@ -88,7 +88,9 @@ export function ModalcriarContato({ setIsModal }) {
         },
       });
 
-      console.log("deu certo", response);
+      console.log('Deu certo');
+      onCadastroSucesso();
+      setIsModal(false);
     } catch (error) {
       console.log(error);
     }
