@@ -16,6 +16,8 @@ import { useState } from "react";
 import { Botao } from "../Buttton";
 import api from "../../api";
 import * as ImagePicker from "expo-image-picker";
+import { useUser } from "../../context/UserContext";
+import { DropDownMenu } from "../DropDownMenu";
 
 const Profissao = [
   { label: "Reporter", value: "Reporter" },
@@ -23,12 +25,15 @@ const Profissao = [
 ];
 
 const Praca = [
-  { label: "SLS", value: "São Luis" },
-  { label: "ITZ", value: "Imperatriz" },
+  { label: "São Luis", value: "São Luis" },
+  { label: "Imperatriz", value: "Imperatriz" },
   { label: "Balsas", value: "Balsas" },
+  { label: "Santa Inês", value: "Santa Ines" },
+  { label: "Morros", value: "Morros" },
 ];
 
 export function ModalcriarContato({ setIsModal, onCadastroSucesso }) {
+  const { getUser } = useUser();
   const [nome, setNome] = useState("");
   const [contato1, setContato1] = useState("");
   const [contato2, setConato2] = useState("");
@@ -87,9 +92,11 @@ export function ModalcriarContato({ setIsModal, onCadastroSucesso }) {
         },
       });
 
-      console.log('Deu certo');
+      getUser();
       onCadastroSucesso();
       setIsModal(false);
+      const message = response.data.message; //pegando mesagem do retorno
+      console.log(message);
     } catch (error) {
       console.log(error);
     }
@@ -112,20 +119,20 @@ export function ModalcriarContato({ setIsModal, onCadastroSucesso }) {
         <ContainerDados>
           <ContainerInfo>
             <Text>Profissão</Text>
-            <Input
-              style={{ width: 370, height: 40 }}
-              placeholder="Profissão"
+            <DropDownMenu
+              data={Profissao}
               value={cargo}
-              onChangeText={(text) => setCargo(text)}
+              setValue={setCargo}
+              placeholder="Profissão"
             />
           </ContainerInfo>
           <ContainerInfo>
             <Text>Praça</Text>
-            <Input
-              style={{ width: 370, height: 40 }}
-              placeholder="São Luis"
+            <DropDownMenu
+              data={Praca}
               value={praca}
-              onChangeText={(text) => setPraca(text)}
+              setValue={setPraca}
+              placeholder="Localidade"
             />
           </ContainerInfo>
         </ContainerDados>

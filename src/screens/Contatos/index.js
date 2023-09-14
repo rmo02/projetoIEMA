@@ -38,7 +38,6 @@ export function Contatos() {
     try {
       const res = await api.get("/employees");
       setContatos(res.data);
-      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
