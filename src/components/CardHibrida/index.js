@@ -61,6 +61,7 @@ export function CardHibrida({data, title}) {
 
 
 
+
   // Render buttons
   const renderLive = (startIndex, endIndex) => {
     return option.slice(startIndex, endIndex).map((opt, index) => {
@@ -130,8 +131,8 @@ export function CardHibrida({data, title}) {
             <Text>{cargo}</Text>
           </Dados>
           <Dados>
-            <Feather name="phone-call" size={24} color={optionColorMapping[option[selected]]?.color300} />
-            <Text>{telefone}</Text>
+            <Feather name="phone-call" size={24} color={optionColorMapping[option[selected]]?.color300} />            
+            {telefone.length > 0 && (<Text>{`(${telefone.slice(0,2)})${telefone.slice(2,7)}-${telefone.slice(7,11)}`}</Text>)}
           </Dados>
         </ContentInfo>
       </Content>

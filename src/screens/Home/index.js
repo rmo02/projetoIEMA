@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { CardHibrida } from "../../components/CardHibrida";
 import { Header } from "../../components/Header";
 import { Container, ContainerCards, Text } from "./styles";
-import api from "../../api";
 import { useUser } from "../../context/UserContext";
 
 export function Home() {
@@ -17,7 +16,7 @@ export function Home() {
       {
         hibridas.map((hibrida, i) =>{
           return (
-            <CardHibrida data={users} title={hibrida}/>
+            <CardHibrida key={i} data={users} title={hibrida}/>
 
           )
         })

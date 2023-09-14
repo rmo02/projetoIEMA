@@ -8,6 +8,7 @@ import {
 } from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useEffect, useState } from "react";
 import { FlatList, Modal, ScrollView, View } from "react-native";
 import { CardContato } from "../../components/CardContato";
