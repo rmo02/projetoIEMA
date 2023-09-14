@@ -36,13 +36,15 @@ export const SelectHibrida = styled.TouchableOpacity`
 export const Dados = styled.View`
   margin-top: 10px;
   margin-left: 10px;
-  gap: 5px;
+  gap: 3px;
   flex-direction: row;
   align-items: center;
+  justify-content: flex-start;
 `;
 
 export const Text = styled.Text`
   font-size: 14px;
+  text-align: justify;
   color: ${(props) => props.theme["WHITE"]};
 `;
 

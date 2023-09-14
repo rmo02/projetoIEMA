@@ -1,6 +1,8 @@
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 import {
   Card,
   ContainerInfo,
@@ -19,7 +21,10 @@ export function CardContato({ data }) {
         <Perfil source={{ uri: data.foto }} />
         <Text>{data?.nome}</Text>
         <ContainerReporter>
-          <Entypo name="modern-mic" size={30} color="gray" />
+          {
+            data?.cargo == "Reporter" ? <Entypo name="modern-mic" size={30} color="gray" />
+            : <MaterialCommunityIcons name="video-vintage" size={30} color="gray" />
+          }
           <SubTitle>{data?.cargo}</SubTitle>
         </ContainerReporter>
         <ContainerReporter>
