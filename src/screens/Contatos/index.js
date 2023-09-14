@@ -22,7 +22,7 @@ export function Contatos() {
   const navigation = useNavigation();
 
   const filterContatos = () => {
-    return contatos.filter((contato) => {
+    return contatos?.filter((contato) => {
       const { nome, praca, cargo } = contato;
       const normalizedSearch = searchTerm.toLowerCase();
 
@@ -38,7 +38,6 @@ export function Contatos() {
     try {
       const res = await api.get("/employees");
       setContatos(res.data);
-      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
