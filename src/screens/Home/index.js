@@ -2,38 +2,25 @@ import { useEffect, useState } from "react";
 import { CardHibrida } from "../../components/CardHibrida";
 import { Header } from "../../components/Header";
 import { Container, ContainerCards, Text } from "./styles";
-import api from "../../api";
+import { useUser } from "../../context/UserContext";
 
 export function Home() {
-  const [user, setUser] = useState()
+  const { users } = useUser();
 
-  const getUser = async () => {
-    try {
-      const res = await api.get('/employees');
-      setUser(res.data)
-
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    getUser()
-  }, [])
-
+  const hibridas = ["Híbrida 1", "Híbrida 2","Híbrida 3","Híbrida 4","Híbrida 5","Híbrida 6","Híbrida 7","Híbrida 8",]
 
   return (
     <Container>
       <Header />
       <ContainerCards>
-        <CardHibrida data={user} />
-        <CardHibrida data={user} />
-        <CardHibrida data={user} />
-        <CardHibrida data={user} />
-        <CardHibrida data={user} />
-        <CardHibrida data={user} />
-        <CardHibrida data={user} />
-        <CardHibrida data={user} />
+      {
+        hibridas.map((hibrida, i) =>{
+          return (
+            <CardHibrida key={i} data={users} title={hibrida}/>
+
+          )
+        })
+      }
       </ContainerCards>
     </Container>
   );
