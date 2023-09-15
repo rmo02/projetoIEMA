@@ -15,7 +15,7 @@ export function Home() {
     // Altera o valor de resetTrigger para acionar a redefinição nos componentes CardHibrida
     setResetTrigger(!resetTrigger);
 
-    // Em algum ponto, você deve finalizar a redefinição e redefinir resetting para false
+    // Em algum ponto, redefinição e redefinindo o resetting para false
     setTimeout(() => {
       setResetting(false);
     }, 2000); // Defina o tempo desejado para a conclusão da redefinição
@@ -33,7 +33,7 @@ export function Home() {
             data={users}
             title={hibrida} 
             reset={resetTrigger}
-            resetting={resetting} // Passe o estado resetting como prop
+            resetting={resetting} // Passando o estado resetting como prop
             />
 
           )

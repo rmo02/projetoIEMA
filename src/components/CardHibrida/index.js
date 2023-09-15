@@ -23,7 +23,7 @@ const option = ["L1", "L2", "L3", "L4", "L5", "L6", "S1", "S2", "S3"];
 export function CardHibrida({ data, title, reset }) {
   const [value, setValue] = useState(null);
   const [selected, setSelected] = useState(null);
-  const [users, setUsers] = useState([]); // Crie um estado para armazenar os usuários
+  const [users, setUsers] = useState([]); // Estado para armazenar os usuários
   const [selectedUser, setSelectedUser] = useState(null); // Estado para armazenar o usuário selecionado
 
   // Função para limpar os dados do card e redefinir para os valores iniciais
@@ -38,7 +38,7 @@ export function CardHibrida({ data, title, reset }) {
   // Efeito para observar mudanças na prop 'reset'
   useEffect(() => {
     if (reset) {
-      // Se a prop 'reset' mudar, chame a função para redefinir o estado
+      // Se a prop 'reset' mudar, chamando a função para redefinir o estado
       resetState();
     }
   }, [reset]);
@@ -120,7 +120,7 @@ export function CardHibrida({ data, title, reset }) {
             value={value}
             onChange={(item) => {
               setValue(item.value);
-              setSelectedUser(item.value); // Atualize o usuário selecionado quando um nome for selecionado
+              setSelectedUser(item.value); // Atualizando o usuário selecionado quando um nome for selecionado
             }}
             renderLeftIcon={() => (
               <AntDesign
