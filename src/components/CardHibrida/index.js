@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   ButtonLive,
   Container,
@@ -6,14 +7,12 @@ import {
   ContentInfo,
   Dados,
   Foto,
-  ScrollLives,
   SelectHibrida,
   Text,
 } from "./style";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { optionColorMapping } from "../../data/Lives";
@@ -21,11 +20,28 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const option = ["L1", "L2", "L3", "L4", "L5", "L6", "S1", "S2", "S3"];
 
-export function CardHibrida({data, title}) {
+export function CardHibrida({ data, title, reset }) {
   const [value, setValue] = useState(null);
   const [selected, setSelected] = useState(null);
   const [users, setUsers] = useState([]); // Crie um estado para armazenar os usuários
   const [selectedUser, setSelectedUser] = useState(null); // Estado para armazenar o usuário selecionado
+
+  // Função para limpar os dados do card e redefinir para os valores iniciais
+  const resetState = () => {
+    setPhoto('https://avatars.githubusercontent.com/u/68224?v=4');
+    setCargo("");
+    setTelefone("");
+    setValue(null);
+    setSelected(null);
+  };
+
+  // Efeito para observar mudanças na prop 'reset'
+  useEffect(() => {
+    if (reset) {
+      // Se a prop 'reset' mudar, chame a função para redefinir o estado
+      resetState();
+    }
+  }, [reset]);
 
   useEffect(() => {
     if (data && data.length > 0) {
@@ -58,10 +74,6 @@ export function CardHibrida({data, title}) {
   const [cargo, setCargo] = useState("");
   const [telefone, setTelefone] = useState("");
 
-
-
-
-
   // Render buttons
   const renderLive = (startIndex, endIndex) => {
     return option.slice(startIndex, endIndex).map((opt, index) => {
@@ -82,8 +94,6 @@ export function CardHibrida({data, title}) {
       );
     });
   };
-
-
 
   return (
     <Container color700={optionColorMapping[option[selected]]?.color700}>
@@ -125,20 +135,19 @@ export function CardHibrida({data, title}) {
           <Dados>
             {
               cargo === "Reporter" ? <Ionicons name="mic" size={24} color={optionColorMapping[option[selected]]?.color300} />
-              : <MaterialCommunityIcons name="video-vintage" size={24} color={optionColorMapping[option[selected]]?.color300} />
-              ?? <Ionicons name="mic" size={24} color={optionColorMapping[option[selected]]?.color300} />
+                : <MaterialCommunityIcons name="video-vintage" size={24} color={optionColorMapping[option[selected]]?.color300} />
             }
             <Text>{cargo}</Text>
           </Dados>
           <Dados>
-            <Feather name="phone-call" size={24} color={optionColorMapping[option[selected]]?.color300} />            
-            {telefone.length > 0 && (<Text>{`(${telefone.slice(0,2)})${telefone.slice(2,7)}-${telefone.slice(7,11)}`}</Text>)}
+            <Feather name="phone-call" size={24} color={optionColorMapping[option[selected]]?.color300} />
+            {telefone.length > 0 && (<Text>{`(${telefone.slice(0, 2)})${telefone.slice(2, 7)}-${telefone.slice(7, 11)}`}</Text>)}
           </Dados>
         </ContentInfo>
       </Content>
 
       <ContainerLive>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{height:300,paddingBottom:30}}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ height: 300, paddingBottom: 30 }}>
           <View>
             <View style={{ flexDirection: "row", gap: 5, marginBottom: 5 }}>
               {renderLive(0, 3)}

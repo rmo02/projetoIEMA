@@ -6,9 +6,15 @@ import dayjs from 'dayjs';
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
-export function Header() {
+export function Header({ onDeleteButtonClick }) {
     const [date, setDate] = useState(dayjs())
+    
     const navigation = useNavigation();
+
+    const handleDeleteButtonClick = () => {
+        // Call the onDeleteButtonClick function passed from the parent component
+        onDeleteButtonClick();
+      };
 
     return (
         <Container>
@@ -18,7 +24,7 @@ export function Header() {
                 <ButtonContato onPress={() => navigation.navigate('Contatos')}>
                         <MaterialIcons name="person-add-alt-1" size={24} color="white" />
                     </ButtonContato>
-                    <ButtonDelete>
+                    <ButtonDelete onPress={()=>handleDeleteButtonClick()}>
                         <Ionicons name="md-trash-outline" size={24} color="white" />
                     </ButtonDelete>
                 </ContainerButtons>

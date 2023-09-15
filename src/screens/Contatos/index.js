@@ -8,7 +8,7 @@ import {
 } from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
 import { FlatList, Modal, ScrollView, View } from "react-native";
 import { CardContato } from "../../components/CardContato";
@@ -17,10 +17,12 @@ import { useNavigation } from "@react-navigation/core";
 import api from "../../api";
 
 export function Contatos() {
-  const [isModal, setIsModal] = useState(false);
   const [contatos, setContatos] = useState();
   const [searchTerm, setSearchTerm] = useState("");
   const navigation = useNavigation();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalMode, setModalMode] = useState("create"); // Pode ser 'create' ou 'edit'
+  const [selectedUser, setSelectedUser] = useState(null); // Usuário selecionado para edição
 
   const filterContatos = () => {
     return contatos?.filter((contato) => {
@@ -49,7 +51,10 @@ export function Contatos() {
   }, []);
 
   const handleCadastroSucesso = () => {
-    getContatos(); // Chamar a função para buscar os contatos novamente após o cadastro bem-sucedido
+    setIsModalVisible(false); // Fecha o modal após sucesso
+    setModalMode("create"); // Define o modo de volta para criação
+    setSelectedUser(null); // Limpa o usuário selecionado
+    getContatos();
   };
 
   return (
@@ -60,7 +65,9 @@ export function Contatos() {
             <AntDesign name="arrowleft" size={24} color="white" />
           </BotaoVoltar>
 
-          <BotaoAdd onPress={() => setIsModal(true)}>
+          <BotaoAdd onPress={() => {
+            setModalMode("create"); 
+            setIsModalVisible(true); }}>
             <Ionicons name="add" size={24} color="white" />
           </BotaoAdd>
         </ContainerButtom>
@@ -71,9 +78,11 @@ export function Contatos() {
         />
       </Header>
 
-      <Modal visible={isModal} transparent={true} animationType="slide">
+      <Modal visible={isModalVisible} transparent={true} animationType="slide">
         <ModalcriarContato
-          setIsModal={setIsModal}
+          mode={modalMode} // Passa o modo para o modal (create ou edit)
+          user={selectedUser} // Passa o usuário selecionado para edição (ou null se for criação)
+          setIsModal={setIsModalVisible}
           onCadastroSucesso={handleCadastroSucesso}
         />
       </Modal>
@@ -81,7 +90,16 @@ export function Contatos() {
       <FlatList
         data={filterContatos()} // Usar a lista filtrada
         keyExtractor={(item) => item.id.toString()} // Usar id.toString() para a chave
-        renderItem={({ item }) => <CardContato data={item} />}
+        renderItem={({ item }) => (
+          <CardContato
+            data={item}
+            onPress={() => {
+              setSelectedUser(item); // Define o usuário selecionado para edição
+              setModalMode("edit"); // Define o modo para edição
+              setIsModalVisible(true); // Abre o modal de criação/edição
+            }}
+          />
+        )}
       />
     </Container>
   );

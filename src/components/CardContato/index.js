@@ -13,10 +13,10 @@ import {
   Text,
 } from "./styles";
 
-export function CardContato({ data }) {
+export function CardContato({ data, onPress }) {
 
   return (
-    <Card>
+    <Card onPress={onPress}>
       <ContainerInfo>
         <Perfil source={{ uri: data.foto }} />
         <Text>{data?.nome}</Text>
