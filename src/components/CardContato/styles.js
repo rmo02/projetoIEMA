@@ -1,6 +1,6 @@
 import { styled } from "styled-components/native";
 
-export const Card=styled.View`
+export const Card=styled.TouchableOpacity`
 margin-top:20px;
 background-color: ${(props) => props.theme["CARD"]};
 width: '100%';
@@ -32,6 +32,8 @@ align-items: center;
 export const Perfil =styled.Image`
 width: 100px;
 height:120px;
+border-bottom-left-radius: 50px;
+border-bottom-right-radius: 50px;
 `;
 
 export const Text = styled.Text`

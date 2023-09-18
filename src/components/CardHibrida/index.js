@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   ButtonLive,
   Container,
@@ -6,20 +7,16 @@ import {
   ContentInfo,
   Dados,
   Foto,
-  ScrollLives,
   SelectHibrida,
   Text,
 } from "./style";
-import fylip from "../../../assets/fylip.jpeg";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { ScrollView, StyleSheet, View, Modal } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { optionColorMapping } from "../../data/Lives";
-import { ModalcriarContato } from "../../components/ModalCriarContato";
-import { ModalCard } from "../ModalCard";
 
 
 const data = [
@@ -43,11 +40,8 @@ const nome = [
 const option = ["L1", "L2", "L3", "L4", "L5", "L6", "S1", "S2", "S3"];
 
 export function CardHibrida() {
-  const [isModalCardVisible, setIsModalCardVisible] = useState(false);
   const [value, setValue] = useState(null);
   const [selected, setSelected] = useState(null);
-
- 
 
   // Render buttons
   const renderLive = (startIndex, endIndex) => {
@@ -72,9 +66,9 @@ export function CardHibrida() {
   return (
     <Container color700={optionColorMapping[option[selected]]?.color700 }>
       <Content>
-        <Foto source={fylip} alt="perfil" />
+        <Foto source={{ uri: photo }} alt="perfil" />
         <ContentInfo>
-          <SelectHibrida onPress={() => setIsModalCardVisible(true)}>
+          <SelectHibrida onPress={() => console.log("hibrida")}>
             <Text>Híbrida 1</Text>
           </SelectHibrida>
 
@@ -96,7 +90,7 @@ export function CardHibrida() {
             selectedTextStyle={styles.selectedTextStyle}
             inputSearchStyle={styles.inputSearchStyle}
             iconStyle={styles.iconStyle}
-            data={nome}
+            data={users}
             search
             maxHeight={300}
             labelField="label"
@@ -106,6 +100,7 @@ export function CardHibrida() {
             value={value}
             onChange={(item) => {
               setValue(item.value);
+              setSelectedUser(item.value); // Atualizando o usuário selecionado quando um nome for selecionado
             }}
             renderLeftIcon={() => (
               <AntDesign
@@ -118,12 +113,15 @@ export function CardHibrida() {
           />
 
           <Dados>
-            <Ionicons name="mic" size={24} color={optionColorMapping[option[selected]]?.color300} />
-            <Text>Reporter</Text>
+            {
+              cargo === "Reporter" ? <Ionicons name="mic" size={24} color={optionColorMapping[option[selected]]?.color300} />
+                : <MaterialCommunityIcons name="video-vintage" size={24} color={optionColorMapping[option[selected]]?.color300} />
+            }
+            <Text>{cargo}</Text>
           </Dados>
           <Dados>
             <Feather name="phone-call" size={24} color={optionColorMapping[option[selected]]?.color300} />
-            <Text>(98)98888-8888</Text>
+            {telefone.length > 0 && (<Text>{`(${telefone.slice(0, 2)})${telefone.slice(2, 7)}-${telefone.slice(7, 11)}`}</Text>)}
           </Dados>
         </ContentInfo>
       </Content>
