@@ -17,6 +17,12 @@
         {
           "photosPermission": "The app acesses your photos to let you share them with your friends."
         }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
       ]
     ],
     "assetBundlePatterns": [

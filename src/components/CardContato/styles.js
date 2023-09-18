@@ -1,6 +1,6 @@
 import { styled } from "styled-components/native";
 
-export const Card=styled.View`
+export const Card=styled.TouchableOpacity`
 margin-top:20px;
 background-color: ${(props) => props.theme["CARD"]};
 width: '100%';

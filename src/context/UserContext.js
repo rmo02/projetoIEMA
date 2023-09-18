@@ -16,6 +16,7 @@ export const UserProvider = ({ children }) => {
     try {
       const res = await api.get('/employees');
       setUsers(res.data);
+      console.log('get funcionário atualizado')
     } catch (error) {
       console.log(error);
     }
