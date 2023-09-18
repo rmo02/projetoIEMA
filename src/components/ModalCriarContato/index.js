@@ -42,7 +42,7 @@ export function ModalcriarContato({ setIsModal, onCadastroSucesso }) {
   const [userPhoto, setUserPhoto] = useState(
     "https://avatars.githubusercontent.com/u/68224?v=4"
   );
-
+console.log (nome)
   const handleUserPhotoSelect = async () => {
     try {
       const photoSelected = await ImagePicker.launchImageLibraryAsync({
