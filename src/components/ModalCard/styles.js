@@ -8,10 +8,10 @@ justify-content: center;
 align-items: center;
 `;
 
-export const ModalContent = styled.View`
-border-radius: 36px;
-padding: 20px;
-`;
+// export const ModalContent = styled.View`
+// border-radius: 36px;
+// padding: 20px;
+// `;
 
 export const Text = styled.Text`
   font-size: 14px;
@@ -20,8 +20,8 @@ export const Text = styled.Text`
 
 export const ButtonLive = styled.TouchableOpacity`
   display: flex;
-  width: 90px;
-  height: 50px;
+  width: 100px;
+  height: 60px;
   border-radius: 8px;
   align-items: center;
   justify-content: center;
@@ -32,26 +32,27 @@ export const ButtonLive = styled.TouchableOpacity`
 `;
 
 export const Container = styled.View`
-align-items: center;
-justify-content: center;
+  width: 460px; 
+  height: 400px;
   border-radius: 16px;
-  flex-shrink: 0;
   background-color: ${(props) => props.color700};
 `;
 
 export const ContainerLive = styled.View`
-  padding-left: 20px;
-  padding-bottom: 5px;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: 10px;
+  padding-left: 15px;
+  // padding-bottom: 5px;
+  // flex-direction: row;
+  
+  // // align-items: center;
+  // flex-wrap: wrap;
+  margin-top: 39px;
  
 `;
 
 export const Content = styled.View`
   flex-direction: row;
+  // justify-content: flex-start;
+  // align-items: center;
 `;
 
 export const ContentInfo = styled.View``;
@@ -65,8 +66,8 @@ export const Dados = styled.View`
 `;
 
 export const Foto = styled.Image`
-  width: 80px;
-  height: 150px;
+  width: 115px;
+  height: 190px;
   border-top-left-radius: 16px;
   border-bottom-right-radius: 16px;
 `;
@@ -98,3 +99,5 @@ gap: 10px;
 export const StyledIonicons = styled(IoniconsOriginal)`
   color: ${(props) => props.theme[props.color300] || "#000"};
 `;
+
+
