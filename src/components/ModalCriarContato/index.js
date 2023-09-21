@@ -31,7 +31,12 @@ const Praca = [
   { label: "Morros", value: "Morros" },
 ];
 
-export function ModalcriarContato({ mode, user, setIsModal, onCadastroSucesso}) {
+export function ModalcriarContato({
+  mode,
+  user,
+  setIsModal,
+  onCadastroSucesso,
+}) {
   const { getUser } = useUser();
   const [nome, setNome] = useState("");
   const [contato1, setContato1] = useState("");
@@ -41,15 +46,18 @@ export function ModalcriarContato({ mode, user, setIsModal, onCadastroSucesso}) 
   const [userPhoto, setUserPhoto] = useState(
     "https://avatars.githubusercontent.com/u/68224?v=4"
   );
+  const [loading, setLoading] = useState(false);
 
-  if (mode === 'edit' && user) {
+  if (mode === "edit" && user) {
     useEffect(() => {
       setNome(user.nome || "");
       setContato1(user.telefones[0] || "");
       setContato2(user.telefones[1] || "");
       setCargo(user.cargo || "");
       setPraca(user.praca || "");
-      setUserPhoto(user.foto || "https://avatars.githubusercontent.com/u/68224?v=4");
+      setUserPhoto(
+        user.foto || "https://avatars.githubusercontent.com/u/68224?v=4"
+      );
     }, [user]);
   }
 
@@ -76,35 +84,35 @@ export function ModalcriarContato({ mode, user, setIsModal, onCadastroSucesso}) 
   };
 
   const onSubmit = async () => {
+    setLoading(true);
     try {
       const fileExtension = userPhoto.split(".").pop();
-  
       const photoFile = {
         name: `${nome}.${fileExtension}`.toLowerCase(),
         uri: userPhoto,
         type: `image/${fileExtension}`,
       };
-  
+
       // Criar um objeto FormData para enviar a imagem
       const formData = new FormData();
       formData.append("foto", photoFile);
-  
+
       // Adicione outros campos ao FormData
       formData.append("nome", nome);
       formData.append("cargo", cargo);
       formData.append("praca", praca);
       formData.append("telefones", JSON.stringify([contato1, contato2]));
-  
+
       // Determinar a rota e o método HTTP com base no modo (create ou edit)
       let url = "/employees";
       let method = "POST"; // POST por padrão
-  
+
       if (mode === "edit" && user) {
         // Se estiver no modo de edição e houver um usuário, use PUT
         url = `/employees/${user.id}`;
         method = "PUT";
       }
-  
+
       // Enviar os dados para o servidor com a rota e o método corretos
       const response = await api.request({
         url,
@@ -121,6 +129,9 @@ export function ModalcriarContato({ mode, user, setIsModal, onCadastroSucesso}) 
       console.log(message);
     } catch (error) {
       console.log(error);
+      setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -195,11 +206,11 @@ export function ModalcriarContato({ mode, user, setIsModal, onCadastroSucesso}) 
           </ContainerInfo>
         </ContainerDados>
         <ContainerButtons>
-        {mode === 'edit' && user && (
+          {mode === "edit" && user && (
             <Botao onPress={() => handleExcluir()} title="Excluir" />
           )}
           <Botao onPress={() => setIsModal(false)} title="Cancelar" />
-          <Botao onPress={() => onSubmit()} title="Salvar" />
+          <Botao onPress={() => onSubmit()} title="Salvar" loading={loading} />
         </ContainerButtons>
       </ModalContent>
     </ModalContainer>
