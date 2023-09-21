@@ -20,12 +20,16 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const option = ["L1", "L2", "L3", "L4", "L5", "L6", "S1", "S2", "S3"];
 
-export function CardHibrida({ data, title, reset }) {
+
+export function CardHibrida({ data, title, reset, setIsModalOpen, setSelectedUserData }) {
   const [value, setValue] = useState(null);
   const [selected, setSelected] = useState(null);
   const [users, setUsers] = useState([]); // Estado para armazenar os usuários
   const [selectedUser, setSelectedUser] = useState(null); // Estado para armazenar o usuário selecionado
 
+  
+
+  
   // Função para limpar os dados do card e redefinir para os valores iniciais
   const resetState = () => {
     setPhoto('https://avatars.githubusercontent.com/u/68224?v=4');
@@ -59,12 +63,14 @@ export function CardHibrida({ data, title, reset }) {
       // Aqui, você deve obter os dados do usuário selecionado a partir do seu estado de dados do backend
       // Suponha que você tenha um array 'data' contendo os dados do backend
       const user = data.find((item) => item.id.toString() === selectedUser);
+      
       if (user) {
         // Atualize a foto, o cargo e o telefone com os dados do usuário selecionado
         // Certifique-se de que as chaves corretas correspondam aos campos no seu objeto de usuário
         setPhoto(user.foto);
         setCargo(user.cargo);
         setTelefone(user.telefones[0]); // Aqui, pegue o primeiro número de telefone
+        setSelectedUserData(user)
       }
     }
   }, [selectedUser, data]);
@@ -100,7 +106,7 @@ export function CardHibrida({ data, title, reset }) {
       <Content>
         <Foto source={{ uri: photo }} alt="perfil" />
         <ContentInfo>
-          <SelectHibrida onPress={() => console.log(title)}>
+          <SelectHibrida onPress={() => setIsModalOpen(true)}>
             <Text>{title}</Text>
           </SelectHibrida>
 
@@ -120,7 +126,7 @@ export function CardHibrida({ data, title, reset }) {
             value={value}
             onChange={(item) => {
               setValue(item.value);
-              setSelectedUser(item.value); // Atualizando o usuário selecionado quando um nome for selecionado
+              setSelectedUser(item.value); // Atualize o estado selectedUser
             }}
             renderLeftIcon={() => (
               <AntDesign
