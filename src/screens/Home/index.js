@@ -3,8 +3,7 @@ import { Header } from "../../components/Header";
 import { Container, ContainerCards } from "./styles";
 import { useUser } from "../../context/UserContext";
 import { useState } from "react";
-import { ModalHibrida } from "../../components/ModalHibrida";
-import { Modal } from "react-native";
+
 
 export function Home() {
   const { users } = useUser();
@@ -20,13 +19,7 @@ export function Home() {
   ];
   const [resetTrigger, setResetTrigger] = useState(false); // Estado para controlar o acionamento da redefinição
   const [resetting, setResetting] = useState(false); // Estado para rastrear se a redefinição está em andamento
-  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar o modal
-  const [selectedUserData, setSelectedUserData] = useState(null);
-  const [selectedUser, setSelectedUser] = useState(null);
 
-  const handleUserSelect = (userId) => {
-    setSelectedUser(userId);
-  };
 
   const handleResetClick = () => {
     setResetting(true); // Marca que a redefinição está em andamento
@@ -51,28 +44,12 @@ export function Home() {
                 data={users}
                 title={hibrida}
                 reset={resetTrigger}
-                resetting={resetting} // Passando o estado resetting como prop
-                setIsModalOpen={setIsModalOpen} // Passando a função para controlar o modalHibrida
-                setSelectedUserData={setSelectedUserData}
-                selectedUser={selectedUser} // Passe o estado selectedUser como prop
-                setSelectedUser={handleUserSelect} // Passe a função para atualizar o selectedUser
+                resetting={resetting} // Passando o estado resetting como prop               
               />
             );
           })}
         </ContainerCards>
       </Container>
-      <Modal
-        visible={isModalOpen}
-        animationType="slide"
-        transparent={true}
-        style={{ justifyContent: "center", alignItems: "center" }}
-      >
-        <ModalHibrida
-          onClose={() => setIsModalOpen(false)}
-          data={users}
-          userData={selectedUserData}
-        />
-      </Modal>
     </>
   );
 }

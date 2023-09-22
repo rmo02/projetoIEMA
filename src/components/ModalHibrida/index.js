@@ -23,15 +23,7 @@ import { optionColorMapping } from "../../data/Lives";
 
 const option = ["L1", "L2", "L3", "L4", "L5", "L6", "S1", "S2", "S3"];
 
-export function ModalHibrida({ onClose, userData, data }) {
-  const [photo, setPhoto] = useState(userData.foto);
-  const [users, setUsers] = useState([]);
-  const [value, setValue] = useState(null);
-  const [cargo, setCargo] = useState(userData.cargo);
-  const [telefone1, setTelefone1] = useState(userData.telefones[0]);
-  const [telefone2, setTelefone2] = useState(userData.telefones[1]);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [selected, setSelected] = useState(null);
+export function ModalHibrida({ onClose, data, setValue, value, selected, setSelected, users, setUsers, selectedUser, setSelectedUser, photo, setPhoto, setCargo, cargo, setTelefone, telefone }) {
 
   useEffect(() => {
     if (data && data.length > 0) {
@@ -45,19 +37,16 @@ export function ModalHibrida({ onClose, userData, data }) {
 
   useEffect(() => {
     if (selectedUser) {
-      const user = data.find((item) => item.id.toString() === selectedUser);
+      const user = data?.find((item) => item.id.toString() === selectedUser);
       if (user) {
         // Atualize os estados do usuário selecionado com os novos dados
         setPhoto(user.foto);
         setCargo(user.cargo);
-        setTelefone1(user.telefones[0]);
-        setTelefone2(user.telefones[1]);
+        setTelefone(user.telefones[0]);
       }
     }
   }, [selectedUser, data]);
-
-
-
+  
   // Render buttons
   const renderLive = (startIndex, endIndex) => {
     return option.slice(startIndex, endIndex).map((opt, index) => {
@@ -79,9 +68,6 @@ export function ModalHibrida({ onClose, userData, data }) {
     });
   };
 
-  console.log(data)
-
- console.log('dados userData', userData)
 
   return (
     <TouchableWithoutFeedback  onPress={onClose}>
@@ -152,10 +138,10 @@ export function ModalHibrida({ onClose, userData, data }) {
                   size={24}
                   color={optionColorMapping[option[selected]]?.color300}
                 />
-                  <Text>{`(${telefone1?.slice(0, 2)})${telefone1?.slice(
+                  <Text>{`(${telefone?.slice(0, 2)})${telefone?.slice(
                     2,
                     7
-                  )}-${telefone1?.slice(7, 11)}`}</Text>
+                  )}-${telefone?.slice(7, 11)}`}</Text>
               </Dados>
               <Dados>
                 <Feather
@@ -163,10 +149,10 @@ export function ModalHibrida({ onClose, userData, data }) {
                   size={24}
                   color={optionColorMapping[option[selected]]?.color300}
                 />
-                  <Text>{`(${telefone2?.slice(0, 2)})${telefone2?.slice(
+                  <Text>{`(${telefone?.slice(0, 2)})${telefone?.slice(
                     2,
                     7
-                  )}-${telefone2?.slice(7, 11)}`}</Text>
+                  )}-${telefone?.slice(7, 11)}`}</Text>
               </Dados>
             </ContentInfo>
           </Content>
