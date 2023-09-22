@@ -4,7 +4,6 @@ import { Container, ContainerCards } from "./styles";
 import { useUser } from "../../context/UserContext";
 import { useState } from "react";
 
-
 export function Home() {
   const { users } = useUser();
   const hibridas = [
@@ -19,7 +18,6 @@ export function Home() {
   ];
   const [resetTrigger, setResetTrigger] = useState(false); // Estado para controlar o acionamento da redefinição
   const [resetting, setResetting] = useState(false); // Estado para rastrear se a redefinição está em andamento
-
 
   const handleResetClick = () => {
     setResetting(true); // Marca que a redefinição está em andamento
@@ -37,17 +35,54 @@ export function Home() {
       <Container>
         <Header onDeleteButtonClick={handleResetClick} />
         <ContainerCards>
-          {hibridas.map((hibrida, i) => {
-            return (
-              <CardHibrida
-                key={i}
-                data={users}
-                title={hibrida}
-                reset={resetTrigger}
-                resetting={resetting} // Passando o estado resetting como prop               
-              />
-            );
-          })}
+          <CardHibrida
+            data={users}
+            title={"Hibrida 1"}
+            reset={resetTrigger}
+            resetting={resetting} // Passando o estado resetting como prop
+          />
+          <CardHibrida
+            data={users}
+            title={"Hibrida 2"}
+            reset={resetTrigger}
+            resetting={resetting} // Passando o estado resetting como prop
+          />
+          <CardHibrida
+            data={users}
+            title={"Hibrida 3"}
+            reset={resetTrigger}
+            resetting={resetting} // Passando o estado resetting como prop
+          />
+          <CardHibrida
+            data={users}
+            title={"Hibrida 4"}
+            reset={resetTrigger}
+            resetting={resetting} // Passando o estado resetting como prop
+          />
+          <CardHibrida
+            data={users}
+            title={"Hibrida 5"}
+            reset={resetTrigger}
+            resetting={resetting} // Passando o estado resetting como prop
+          />
+          <CardHibrida
+            data={users}
+            title={"Hibrida 6"}
+            reset={resetTrigger}
+            resetting={resetting} // Passando o estado resetting como prop
+          />
+          <CardHibrida
+            data={users}
+            title={"Hibrida 7"}
+            reset={resetTrigger}
+            resetting={resetting} // Passando o estado resetting como prop
+          />
+          <CardHibrida
+            data={users}
+            title={"Hibrida 8"}
+            reset={resetTrigger}
+            resetting={resetting} // Passando o estado resetting como prop
+          />
         </ContainerCards>
       </Container>
     </>

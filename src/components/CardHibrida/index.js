@@ -187,14 +187,32 @@ export function CardHibrida({ data, title, reset }) {
           </ScrollView>
         </ContainerLive>
       </Container>
-        <Modal
-          visible={isModalOpen}
-          animationType="slide"
-          transparent={true}
-          style={{ justifyContent: "center", alignItems: "center" }}
-        >
-          <ModalHibrida onClose={() => setIsModalOpen(false)} data={data} setValue={setValue} value={value} selected={selected} setSelected={setSelected} users={users} setUsers={setUsers} selectedUser={selectedUser} setSelectedUser={setSelectedUser} photo={photo} setPhoto={setPhoto} cargo={cargo} setCargo={setCargo} setTelefone={setTelefone} telefone={telefone}/>
-        </Modal>
+      <Modal
+        visible={isModalOpen}
+        animationType="slide"
+        transparent={true}
+        style={{ justifyContent: "center", alignItems: "center" }}
+      >
+        <ModalHibrida
+          onClose={() => setIsModalOpen(false)}
+          data={data}
+          setValue={setValue}
+          value={value}
+          selected={selected}
+          setSelected={setSelected}
+          users={users}
+          setUsers={setUsers}
+          selectedUser={selectedUser}
+          setSelectedUser={setSelectedUser}
+          photo={photo}
+          setPhoto={setPhoto}
+          cargo={cargo}
+          setCargo={setCargo}
+          setTelefone={setTelefone}
+          telefone={telefone}
+          title={title}
+        />
+      </Modal>
     </>
   );
 }
