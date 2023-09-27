@@ -41,14 +41,13 @@ export function ModalHibrida({
   cargo,
   setTelefone,
   telefone,
-  title
+  title,
+  setEditedHibrida,
+  editedHibrida
 }) {
-  const [hibrida, setHibrida]= useState(title)
   const [telefone2, setTelefone2] = useState(`${data[0]?.telefones[1]}`)
-
-
+  
   const hibridas = [
-    {label:`${title}`, value: `${title}`},
     { label: "Hibrida 1", value: "Hibrida 1" },
     { label: "Hibrida 2", value: "Hibrida 2" },
     { label: "Hibrida 4", value: "Hibrida 3" },
@@ -124,9 +123,9 @@ export function ModalHibrida({
                 valueField="value"
                 placeholder="Hibrida"
                 searchPlaceholder="Pesquisar"
-                value={value}
+                value={editedHibrida}
                 onChange={(item) => {
-                  setHibrida(item.value);
+                  setEditedHibrida(item.value);
                 }}
               />
 
@@ -141,7 +140,7 @@ export function ModalHibrida({
                 maxHeight={400}
                 labelField="label"
                 valueField="value"
-                placeholder="Hibrida"
+                placeholder="Funcionário"
                 searchPlaceholder="Pesquisar"
                 value={value}
                 onChange={(item) => {

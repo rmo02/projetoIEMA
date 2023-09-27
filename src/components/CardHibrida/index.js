@@ -27,6 +27,7 @@ export function CardHibrida({ data, title, reset }) {
   const [users, setUsers] = useState([]); // Estado para armazenar os usuários
   const [selectedUser, setSelectedUser] = useState(null); // Estado para armazenar o usuário selecionado
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editedHibrida, setEditedHibrida] = useState(title);
 
   // Função para limpar os dados do card e redefinir para os valores iniciais
   const resetState = () => {
@@ -35,6 +36,7 @@ export function CardHibrida({ data, title, reset }) {
     setTelefone("");
     setValue(null);
     setSelected(null);
+    setEditedHibrida(title)
   };
 
   // Efeito para observar mudanças na prop 'reset'
@@ -100,6 +102,7 @@ export function CardHibrida({ data, title, reset }) {
     });
   };
 
+
   return (
     <>
       <Container color700={optionColorMapping[option[selected]]?.color700}>
@@ -107,7 +110,7 @@ export function CardHibrida({ data, title, reset }) {
           <Foto source={{ uri: photo }} alt="perfil" />
           <ContentInfo>
             <SelectHibrida onPress={() => setIsModalOpen(true)}>
-              <Text>{title}</Text>
+              <Text>{editedHibrida}</Text>
             </SelectHibrida>
 
             <Dropdown
@@ -210,7 +213,8 @@ export function CardHibrida({ data, title, reset }) {
           setCargo={setCargo}
           setTelefone={setTelefone}
           telefone={telefone}
-          title={title}
+          setEditedHibrida={setEditedHibrida}
+          editedHibrida={editedHibrida}
         />
       </Modal>
     </>
