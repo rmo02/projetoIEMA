@@ -105,7 +105,7 @@ export function ModalHibrida({
 
   return (
     <TouchableWithoutFeedback onPress={onClose}>
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center",  backgroundColor: "rgba(0, 0, 0, 0.5)", opacity: 1.5,  }}>
         <Container color700={optionColorMapping[option[selected]]?.color700}>
           <Content>
             <Foto source={{ uri: photo }} alt="perfil" />
