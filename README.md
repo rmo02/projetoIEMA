@@ -1,4 +1,4 @@
-## <div align="center">Restaurant App</div>
+## <div align="center">Gerenciamento de Links Ao Vivo</div>
 
 <p>Este projeto foi desenvolvido em parceria com alunos do Instituto Estadual de Educação, Ciência e Tecnologia do Maranhão (IEMA)</p>
 
