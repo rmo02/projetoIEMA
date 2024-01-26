@@ -2,7 +2,8 @@ import { CardHibrida } from "../../components/CardHibrida";
 import { Header } from "../../components/Header";
 import { Container, ContainerCards } from "./styles";
 import { useUser } from "../../context/UserContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { BackHandler } from "react-native";
 
 const hibridas = [
   "Hibrida 1",
@@ -30,6 +31,12 @@ export function Home() {
       setResetting(false);
     }, 1000); // Defina o tempo desejado para a conclusão da redefinição
   };
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', () =>{
+      return true
+    })
+  }, [])
 
   return (
     <>

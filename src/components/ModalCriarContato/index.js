@@ -28,7 +28,8 @@ const Praca = [
   { label: "Imperatriz", value: "Imperatriz" },
   { label: "Balsas", value: "Balsas" },
   { label: "Santa Inês", value: "Santa Ines" },
-  { label: "Morros", value: "Morros" },
+  { label: "Caxias", value: "Caxias" },
+  { label: "Codo ", value: "Codo" },
 ];
 
 export function ModalcriarContato({
@@ -44,7 +45,7 @@ export function ModalcriarContato({
   const [cargo, setCargo] = useState("");
   const [praca, setPraca] = useState("");
   const [userPhoto, setUserPhoto] = useState(
-    "https://avatars.githubusercontent.com/u/68224?v=4"
+    "https://e7.pngegg.com/pngimages/103/590/png-clipart-computer-icons-user-profile-avatar-heroes-monochrome-thumbnail.png"
   );
   const [loading, setLoading] = useState(false);
 
@@ -113,6 +114,8 @@ export function ModalcriarContato({
         method = "PUT";
       }
 
+      console.log('sadsadsa',formData)
+
       // Enviar os dados para o servidor com a rota e o método corretos
       const response = await api.request({
         url,
@@ -122,6 +125,7 @@ export function ModalcriarContato({
           "Content-Type": "multipart/form-data",
         },
       });
+      console.log('deu certo', response.data)
       getUser();
       onCadastroSucesso();
       setIsModal(false);
@@ -190,6 +194,7 @@ export function ModalcriarContato({
             <Text>Contato</Text>
             <Input
               style={{ width: 370, height: 40 }}
+              keyboardType="numeric"
               placeholder="(98)1234-5678"
               value={contato1}
               onChangeText={(text) => setContato1(text)}
@@ -199,6 +204,7 @@ export function ModalcriarContato({
             <Text>Contato 2</Text>
             <Input
               style={{ width: 370, height: 40 }}
+              keyboardType="numeric"
               placeholder="(98)1234-5678"
               value={contato2}
               onChangeText={(text) => setContato2(text)}
